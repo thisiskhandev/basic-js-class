@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #box {
+        --size: 200px;
+        width: var(--size);
+        height: var(--size);
+        border: 1px solid;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/function.html">Functions</a></li>
+          <li><a href=""></a></li>
+          <li><a href=""></a></li>
+          <li><a href=""></a></li>
+        </ul>
+      </nav>
+    </header>
+    <div id="heading">Basic JS</div>
+    <button id="btn">Click</button>
+    <button id="btnColor">Add Color</button>
+    <br />
+    <br />
+    <hr />
+    <br />
+
+    <div id="box">Name of color</div>
+
+    <br />
+    <input type="text" id="nameColor" placeholder="Name of color" />
+
+    <br />
+    <br />
+    <script>
+      let heading = document.getElementById("heading");
+      let btn = document.getElementById("btn");
+
+      btn.addEventListener("click", function () {
+        // heading.innerText = "This is new text!";
+        // heading.innerText = "<h2>Heading!</h2>";
+        heading.innerHTML = "<h2>Heading!</h2>";
+        this.innerText = "Change color now!";
+      });
+
+      document
+        .getElementById("btnColor")
+        .addEventListener("click", function () {
+          heading.style.color = "blue";
+        });
+
+      btn.addEventListener("dblclick", changeOnDbClick);
+
+      function changeOnDbClick() {
+        heading.style.backgroundColor = "red";
+        heading.style.color = "#fff";
+      }
+
+      // Global Scope
+      let inpColor = document.getElementById("nameColor");
+      let box = document.getElementById("box");
+
+      inpColor.addEventListener("change", function () {
+        // Local Scope
+        let getColorName = this.value;
+        box.style.backgroundColor = getColorName;
+        box.innerText = getColorName;
+      });
+
+      // console.log(inpColor);
+    </script>
+  </body>
+</html>
