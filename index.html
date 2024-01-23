@@ -43,6 +43,14 @@
 
     <br />
     <br />
+
+    <hr />
+    <br /><br />
+
+    <h2>Place value here...</h2>
+    <input type="text" id="value" />
+    <button onclick="clickFun()">Click and get value</button>
+
     <script>
       let heading = document.getElementById("heading");
       let btn = document.getElementById("btn");
@@ -79,6 +87,13 @@
       });
 
       // console.log(inpColor);
+    </script>
+
+    <script>
+      function clickFun() {
+        let value = document.getElementById("value").value;
+        document.getElementsByTagName("h2")[0].innerText = value;
+      }
     </script>
   </body>
 </html>
