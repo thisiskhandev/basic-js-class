@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Array</title>
+  </head>
+  <body>
+    <!-- <h1>Arrays</h1> -->
+
+    <!-- <h2>Planets Names</h2> -->
+    <div id="list"></div>
+
+    <h3 id="num">0</h3>
+    <button id="btn">Increment</button>
+
+    <script>
+      // First Approach
+      let stuArr = [];
+      stuArr[0] = "Student 1";
+      stuArr[1] = "Student 2";
+      stuArr[2] = "Student 3";
+      stuArr[3] = "Student 4";
+      stuArr[4] = "Student 5";
+      //   console.log(stuArr);
+
+      // Second Approach
+      let carsArr = ["BMW", "Toyota", "Lambo", "Mercedes"];
+      //   console.log(carsArr);
+
+      // Third approach
+      let planetsArr = new Array("Earth", "Jupitor", "Pluto", "Mars");
+      //   console.log(planetsArr);
+
+      let orderedList = document.querySelector("#list");
+
+      // Loops
+      // for
+      // foreach
+      // while
+      // dowhile
+      // SwitchCase
+
+      let planetItems = "";
+      planetsArr.forEach(function (items, index, arr) {
+        planetItems += "<li>";
+        planetItems += items;
+        planetItems += "</li>";
+      });
+
+      orderedList.insertAdjacentHTML(
+        "afterbegin",
+        "<ol>" + planetItems + "</ol>"
+      );
+    </script>
+
+    <script>
+      let num = document.getElementById("num");
+      let btn = document.querySelector("#btn");
+
+      let value = 1;
+      btn.addEventListener("click", function (event) {
+        value = value + 1;
+        console.log(value);
+        num.innerHTML = value;
+      });
+    </script>
+  </body>
+</html>

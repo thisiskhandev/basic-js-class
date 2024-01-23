@@ -17,3 +17,12 @@ sum(5, 5); // Calling
 sum("Salman", " Ahmed");
 sum("Hassan", " Khan");
 sum();
+
+// -------------------------
+
+function myFun(rec_1, rec_2) {
+  return rec_1 * rec_2;
+}
+
+let result = myFun(2, 3);
+document.querySelector(".parent").innerHTML = "<h2>" + result + "</h2>"; // Concatination
