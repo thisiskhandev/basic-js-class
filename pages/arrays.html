@@ -14,6 +14,8 @@
     <h3 id="num">0</h3>
     <button id="btn">Increment</button>
 
+    <ul id="btnsData"></ul>
+    <div class="btns"></div>
     <script>
       // First Approach
       let stuArr = [];
@@ -58,11 +60,36 @@
       let num = document.getElementById("num");
       let btn = document.querySelector("#btn");
 
-      let value = 1;
+      let value = 0;
       btn.addEventListener("click", function (event) {
         value = value + 1;
         console.log(value);
         num.innerHTML = value;
+      });
+
+      // Button codes starts from here...
+      carsArr.forEach(function (carsItems, ind) {
+        document.querySelector(".btns").innerHTML +=
+          "<button class='cars_btns' value=" +
+          carsItems +
+          ">" +
+          carsItems +
+          "</button>";
+      });
+
+      document.querySelectorAll(".cars_btns").forEach(function (btnItem, ind) {
+        btnItem.addEventListener("click", function (event) {
+          console.log(event);
+          let btnVal = this.value;
+          // document
+          //   .getElementById("btnsData")
+          //   .insertAdjacentHTML("afterbegin", "<li>" + btnVal + "</li>");
+          document.getElementById("btnsData").innerHTML +=
+            "<li>" + btnVal + "</li>";
+          this.style.textDecoration = "line-through";
+          btnItem.style.cursor = "no-drop";
+          btnItem.setAttribute("disabled", "");
+        });
       });
     </script>
   </body>

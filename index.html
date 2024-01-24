@@ -22,8 +22,8 @@
       <nav>
         <ul>
           <li><a href="/">Home</a></li>
-          <li><a href="/function.html">Functions</a></li>
-          <li><a href="/arrays.html">Arrays</a></li>
+          <li><a href="pages/function.html">Functions</a></li>
+          <li><a href="pages/arrays.html">Arrays</a></li>
           <li><a href=""></a></li>
           <li><a href=""></a></li>
         </ul>
@@ -94,6 +94,31 @@
       function clickFun() {
         let value = document.getElementById("value").value;
         document.getElementsByTagName("h2")[0].innerText = value;
+      }
+
+      function navigation() {
+        let navArr = [
+          {
+            name: "Home",
+            link: "/",
+          },
+          {
+            name: "Functions",
+            link: "/basic-js-class/pages/function.html",
+          },
+          {
+            name: "Arrays",
+            link: "/basic-js-class/pages/arrays.html",
+          },
+        ];
+        let header = document.querySelector("header > nav > ul");
+      }
+
+      if (window.location.host == "thisiskhandev.github.io") {
+        console.warn("Header changed!");
+        navArr.map(function (items, index) {
+          header.innerHTML += `<li><a href="${items.link}">${items.name}</a></li>`;
+        });
       }
     </script>
   </body>
