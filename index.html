@@ -115,6 +115,7 @@
       }
 
       if (window.location.host == "thisiskhandev.github.io") {
+        navigation();
         console.warn("Header changed!");
         navArr.map(function (items, index) {
           header.innerHTML += `<li><a href="${items.link}">${items.name}</a></li>`;
