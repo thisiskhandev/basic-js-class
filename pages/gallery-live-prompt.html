@@ -102,9 +102,18 @@
       console.log(currSection);
 
       function onSuccess() {
-        currSection.removeAttribute("show");
         currSection.nextElementSibling.setAttribute("show", "");
+        // currSection.removeAttribute("show");
+        // window.scrollTo("section[show]");
+        // console.log(currSection);
         console.log(currSection);
+        const options = {
+          inline: "start",
+          block: "end",
+          behavior: "smooth",
+        };
+
+        document.getElementsByTagName("body")[0].scrollIntoView(options);
       }
 
       function showError(errMsg = "Error!") {
@@ -145,7 +154,11 @@
           (items) => items !== "" && !isNaN(items)
         );
         // console.log(filterValues);
-        filterValues = imgArr;
+        imgArr = filterValues;
+        currSection.nextElementSibling.nextElementSibling.setAttribute(
+          "show",
+          ""
+        );
         onSuccess();
         galleryFun();
       }
