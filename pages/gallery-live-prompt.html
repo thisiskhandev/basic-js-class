@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gallery Live - Prompt</title>
+    <style>
+      body {
+        overflow-x: hidden;
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #eee;
+      }
+      section {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 10px;
+        max-width: 400px;
+        margin: auto;
+        display: none;
+      }
+      section[show] {
+        display: flex;
+      }
+      section div.btns {
+        width: 100%;
+        display: grid;
+        justify-content: space-between;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+      button {
+        -webkit-appearance: none;
+        border: 0;
+        outline: 0;
+        font-size: 18px;
+        cursor: pointer;
+        background-color: rgb(255, 213, 159);
+        padding: 10px;
+        border-radius: 8px;
+        transition: 0.3s;
+      }
+      button.selected {
+        background-color: rgb(255, 179, 79);
+        transition: 0.3s;
+      }
+      .error_msg {
+        color: #fff;
+        font-weight: 600;
+        padding: 10px;
+        border-radius: 10px;
+        background-color: red;
+        position: absolute;
+        bottom: 10%;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="step1" show>
+      <label for="">How Many indexes you want?</label>
+      <input type="text" id="quesInd" min="1" max="5" autocomplete="false" />
+      <br />
+      <button id="quesIndBtn" onclick="quesIndFun()">Ans</button>
+    </section>
+
+    <section class="step2">
+      <textarea
+        name=""
+        id=""
+        cols="30"
+        rows="5"
+        style="resize: none; overflow: hidden"
+        placeholder="Add with breaks"
+      ></textarea>
+      <button onclick="getNumsFun()">Ans</button>
+    </section>
+
+    <section class="preview">
+      <h1>Select Gallery Image - Live</h1>
+      <div>
+        <img
+          src="https://picsum.photos/id/237/400"
+          alt="Images"
+          height="300"
+          width="400"
+          style="object-fit: cover"
+        />
+      </div>
+      <div class="btns"></div>
+    </section>
+
+    <script>
+      let imgArr = [];
+      let values = "";
+      let quesInd = document.getElementById("quesInd");
+      let src = document.getElementsByTagName("img")[0];
+      let currSection = document.querySelector("section[show]");
+      let allValues = document.getElementsByTagName("textarea")[0];
+
+      console.log(currSection);
+
+      function onSuccess() {
+        currSection.removeAttribute("show");
+        currSection.nextElementSibling.setAttribute("show", "");
+        console.log(currSection);
+      }
+
+      function showError(errMsg = "Error!") {
+        let timer = 0;
+        const timerInterval = setInterval(() => {
+          timer = timer + 1;
+          console.log(timer);
+          currSection.insertAdjacentHTML(
+            "beforeend",
+            `<span class="error_msg">${errMsg + " " + timer}</span>`
+          );
+        }, 1000);
+
+        setTimeout(() => {
+          clearInterval(timerInterval);
+          document
+            .querySelectorAll(".error_msg")
+            .forEach((elems) => elems.remove());
+        }, 4000);
+      }
+
+      function quesIndFun() {
+        values = Number(quesInd.value);
+        console.log(values);
+        if (isNaN(values)) {
+          showError("Put the valid number!");
+        } else if (values === 0) {
+          showError("Empty!");
+        } else {
+          allValues.setAttribute("rows", values);
+          onSuccess();
+        }
+      }
+
+      function getNumsFun() {
+        values = allValues.value.split("\n");
+        let filterValues = values.filter(
+          (items) => items !== "" && !isNaN(items)
+        );
+        // console.log(filterValues);
+        filterValues = imgArr;
+        onSuccess();
+        galleryFun();
+      }
+
+      function galleryFun() {
+        imgArr.forEach(function (imgElements, index) {
+          index = index + 1;
+          document
+            .querySelector(".btns")
+            .insertAdjacentHTML(
+              "beforeend",
+              '<button class="btn" data-code=' +
+                imgElements +
+                "> Image " +
+                index +
+                "</button>"
+            );
+        });
+
+        let btn = document.querySelectorAll(".btn");
+
+        btn.forEach(function (btnElement, index) {
+          btnElement.addEventListener("click", function () {
+            let num = index + 1;
+            btn.forEach(function (elem, ind) {
+              let inde = ind + 1;
+              elem.innerText = "Image " + inde;
+              elem.classList.remove("selected");
+            });
+            let code = btnElement.getAttribute("data-code");
+            btnElement.innerText = "Image " + num + " (Selected)";
+            btnElement.classList.add("selected");
+            src.setAttribute(
+              "src",
+              "https://picsum.photos/id/" + code + "/400"
+            );
+          });
+        });
+      }
+    </script>
+  </body>
+</html>
