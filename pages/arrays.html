@@ -16,6 +16,8 @@
 
     <ul id="btnsData"></ul>
     <div class="btns"></div>
+
+    <ul id="unionArr"></ul>
     <script>
       // First Approach
       let stuArr = [];
@@ -91,6 +93,38 @@
           btnItem.setAttribute("disabled", "");
         });
       });
+
+      let arr_students_1 = [
+        "Students 1",
+        "Students 2",
+        "Students 3",
+        "Students 4",
+        "Students 5",
+      ];
+      let arr_students_2 = [
+        "Students 1",
+        "Students 6",
+        "Students 9",
+        "Students 7",
+        "Students 3",
+        "Students 66",
+        "Students 99",
+      ];
+
+      let stu_filtered = arr_students_1.filter(checkUnions);
+      let stu_filtered_not_same = arr_students_1.filter(checkIntersection);
+
+      function checkUnions(items) {
+        return arr_students_2.includes(items);
+      }
+
+      function checkIntersection(items) {
+        return !arr_students_2.includes(items);
+      }
+
+      console.log(stu_filtered_not_same);
     </script>
   </body>
 </html>
+
+<!-- ['Students 1'] [] ['Students 3'] [] [] -->
